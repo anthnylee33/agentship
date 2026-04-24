@@ -27,14 +27,11 @@ export function EndGameModal({
       if (e.key === 'Escape') {
         e.preventDefault();
         onClose();
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        onNewGame();
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open, onClose, onNewGame]);
+  }, [open, onClose]);
 
   if (!open || !winner) return null;
 
