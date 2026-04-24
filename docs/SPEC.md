@@ -3,8 +3,8 @@
 ## Objective
 
 Build a single-player Battleship-style game against an AI opponent, reskinned
-as an enterprise SaaS dashboard where the player uses autonomous agents to
-clear technical debt.
+as an educational tool where the player uses autonomous agents to clear
+technical debt.
 
 ## Technical Stack
 
@@ -217,3 +217,7 @@ Scope:
   Hallucination (Cruiser, 3), Agentic Regression (Submarine, 3), Stale
   Workspace Index (Destroyer, 2). The educational modal copy was updated to
   match.
+* Reworded the Objective: the framing changed from "enterprise SaaS
+  dashboard" to "educational tool". The visual treatment in the
+  `UI/UX Design Specifications` section (dark dashboard, slate palette,
+  sidebar Activity Log) is unchanged.
