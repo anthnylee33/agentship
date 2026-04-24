@@ -1,4 +1,4 @@
-# Bug Bash — The Agentic Refactor
+# AgentShip — The Agentic Refactor
 
 A single-player Battleship-style game, reskinned as an enterprise SaaS dashboard
 where the player uses autonomous agents to clear technical debt.

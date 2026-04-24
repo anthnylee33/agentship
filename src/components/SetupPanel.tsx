@@ -96,7 +96,7 @@ export function SetupPanel() {
               : 'bg-slate-700 text-slate-400 cursor-not-allowed',
           ].join(' ')}
         >
-          {allPlaced ? 'Begin Bug Bash' : `Place ${BUG_TYPES.length - placedIds.size} more`}
+          {allPlaced ? 'Begin AgentShip' : `Place ${BUG_TYPES.length - placedIds.size} more`}
         </button>
       </div>
     </div>

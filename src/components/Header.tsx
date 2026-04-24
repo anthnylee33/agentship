@@ -18,11 +18,11 @@ export function Header() {
     <header className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4 md:mb-6">
       <div className="flex items-center gap-3">
         <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-500 grid place-items-center text-slate-950 font-black">
-          B
+          A
         </div>
         <div>
           <h1 className="text-lg md:text-xl font-semibold tracking-tight text-slate-100">
-            Bug Bash <span className="text-slate-400 font-normal">— The Agentic Refactor</span>
+            AgentShip <span className="text-slate-400 font-normal">— The Agentic Refactor</span>
           </h1>
           <p className="text-xs text-slate-400">Tech-debt remediation console · v0.1</p>
         </div>
