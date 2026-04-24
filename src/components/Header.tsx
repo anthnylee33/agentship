@@ -1,6 +1,10 @@
 import { useGame } from '../context/GameContext';
 
-export function Header() {
+interface HeaderProps {
+  onShowHelp?: () => void;
+}
+
+export function Header({ onShowHelp }: HeaderProps) {
   const { phase, currentTurn, winner, newGame, seed, setSeed } = useGame();
 
   const status =
@@ -62,6 +66,18 @@ export function Header() {
         >
           New incident
         </button>
+
+        {onShowHelp && (
+          <button
+            type="button"
+            onClick={onShowHelp}
+            aria-label="How to play"
+            title="How to play"
+            className="text-xs w-7 h-7 grid place-items-center rounded-md bg-slate-800 hover:bg-slate-700 ring-1 ring-slate-700 text-slate-300 font-semibold"
+          >
+            ?
+          </button>
+        )}
       </div>
     </header>
   );

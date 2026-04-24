@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { Board } from './components/Board';
 import { SetupPanel } from './components/SetupPanel';
 import { ActivityLog } from './components/ActivityLog';
 import { EducationalModal } from './components/EducationalModal';
 import { Header } from './components/Header';
+import { WelcomeModal } from './components/WelcomeModal';
 import { GameProvider, useGame } from './context/GameContext';
 import type { Coord } from './game';
 
-function GameSurface() {
+const WELCOME_STORAGE_KEY = 'agentship.welcome.dismissed.v1';
+
+function GameSurface({ onShowHelp }: { onShowHelp: () => void }) {
   const {
     phase,
     playerBoard,
@@ -51,7 +55,7 @@ function GameSurface() {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-200">
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-6 md:py-8">
-        <Header />
+        <Header onShowHelp={onShowHelp} />
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_18rem] gap-4 md:gap-6">
           <Board
@@ -133,10 +137,31 @@ function Stat({ label, value, tone }: { label: string; value: number; tone: 'sky
   );
 }
 
+function shouldShowWelcomeOnLoad(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    return window.localStorage.getItem(WELCOME_STORAGE_KEY) === null;
+  } catch {
+    return true;
+  }
+}
+
 export default function App() {
+  const [welcomeOpen, setWelcomeOpen] = useState<boolean>(shouldShowWelcomeOnLoad);
+
+  const closeWelcome = () => {
+    setWelcomeOpen(false);
+    try {
+      window.localStorage.setItem(WELCOME_STORAGE_KEY, '1');
+    } catch {
+      /* no-op: localStorage unavailable */
+    }
+  };
+
   return (
     <GameProvider>
-      <GameSurface />
+      <GameSurface onShowHelp={() => setWelcomeOpen(true)} />
+      <WelcomeModal open={welcomeOpen} onClose={closeWelcome} />
     </GameProvider>
   );
 }
