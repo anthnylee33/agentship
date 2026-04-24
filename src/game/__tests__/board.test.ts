@@ -17,7 +17,7 @@ import { createRNG } from '../rng';
 describe('placement validation', () => {
   it('accepts valid in-bounds horizontal placements', () => {
     const p: BugPlacement = {
-      bugId: 'syntax-error',
+      bugId: 'stale-workspace-index',
       origin: { row: 0, col: 0 },
       orientation: 'horizontal',
     };
@@ -26,7 +26,7 @@ describe('placement validation', () => {
 
   it('rejects placements that run off the right edge', () => {
     const p: BugPlacement = {
-      bugId: 'systemic-architecture-flaw', // size 5
+      bugId: 'context-window-collapse', // size 5
       origin: { row: 0, col: 6 }, // 6,7,8,9,10 — out of bounds
       orientation: 'horizontal',
     };
@@ -35,7 +35,7 @@ describe('placement validation', () => {
 
   it('rejects placements that run off the bottom edge', () => {
     const p: BugPlacement = {
-      bugId: 'memory-leak', // size 4
+      bugId: 'infinite-execution-loop', // size 4
       origin: { row: 7, col: 0 }, // rows 7,8,9,10
       orientation: 'vertical',
     };
@@ -44,12 +44,12 @@ describe('placement validation', () => {
 
   it('rejects overlapping placements', () => {
     const a: BugPlacement = {
-      bugId: 'race-condition',
+      bugId: 'cascading-hallucination',
       origin: { row: 1, col: 1 },
       orientation: 'horizontal',
     };
     const b: BugPlacement = {
-      bugId: 'syntax-error',
+      bugId: 'stale-workspace-index',
       origin: { row: 1, col: 2 }, // overlaps with a
       orientation: 'horizontal',
     };
@@ -59,12 +59,12 @@ describe('placement validation', () => {
 
   it('allows non-overlapping placements adjacent to existing bugs', () => {
     const a: BugPlacement = {
-      bugId: 'race-condition',
+      bugId: 'cascading-hallucination',
       origin: { row: 1, col: 1 },
       orientation: 'horizontal',
     };
     const b: BugPlacement = {
-      bugId: 'syntax-error',
+      bugId: 'stale-workspace-index',
       origin: { row: 2, col: 1 },
       orientation: 'horizontal',
     };
@@ -112,12 +112,12 @@ describe('shot resolution', () => {
     const b = emptyBoard();
     b.placements = [
       {
-        bugId: 'syntax-error', // size 2 at (0,0)-(0,1)
+        bugId: 'stale-workspace-index', // size 2 at (0,0)-(0,1)
         origin: { row: 0, col: 0 },
         orientation: 'horizontal',
       },
       {
-        bugId: 'race-condition', // size 3 at (5,5)-(5,7)
+        bugId: 'cascading-hallucination', // size 3 at (5,5)-(5,7)
         origin: { row: 5, col: 5 },
         orientation: 'horizontal',
       },
@@ -135,7 +135,7 @@ describe('shot resolution', () => {
   it('detects hits without sinking', () => {
     const r = resolveShot(board, { row: 5, col: 5 });
     expect(r.result).toBe('hit');
-    expect(r.bugId).toBe('race-condition');
+    expect(r.bugId).toBe('cascading-hallucination');
     expect(r.board.shots[coordKey({ row: 5, col: 5 })]).toBe('hit');
   });
 
@@ -144,10 +144,10 @@ describe('shot resolution', () => {
     b = resolveShot(b, { row: 0, col: 0 }).board;
     const final = resolveShot(b, { row: 0, col: 1 });
     expect(final.result).toBe('sunk');
-    expect(final.bugId).toBe('syntax-error');
+    expect(final.bugId).toBe('stale-workspace-index');
     expect(final.board.shots[coordKey({ row: 0, col: 0 })]).toBe('sunk');
     expect(final.board.shots[coordKey({ row: 0, col: 1 })]).toBe('sunk');
-    expect(final.board.resolvedBugs).toContain('syntax-error');
+    expect(final.board.resolvedBugs).toContain('stale-workspace-index');
   });
 
   it('does not double-count when shooting an already-shot cell', () => {
@@ -175,7 +175,7 @@ describe('allBugsResolved', () => {
     const b = emptyBoard();
     b.placements = [
       {
-        bugId: 'syntax-error',
+        bugId: 'stale-workspace-index',
         origin: { row: 0, col: 0 },
         orientation: 'horizontal',
       },

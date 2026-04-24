@@ -3,11 +3,11 @@ export const BOARD_SIZE = 10;
 export type Orientation = 'horizontal' | 'vertical';
 
 export type BugTypeId =
-  | 'systemic-architecture-flaw'
-  | 'memory-leak'
-  | 'race-condition'
-  | 'infinite-loop'
-  | 'syntax-error';
+  | 'context-window-collapse'
+  | 'infinite-execution-loop'
+  | 'cascading-hallucination'
+  | 'agentic-regression'
+  | 'stale-workspace-index';
 
 export interface BugType {
   id: BugTypeId;
@@ -22,44 +22,44 @@ export interface BugType {
 
 export const BUG_TYPES: readonly BugType[] = [
   {
-    id: 'systemic-architecture-flaw',
-    name: 'Systemic Architecture Flaw',
+    id: 'context-window-collapse',
+    name: 'Context Window Collapse',
     classic: 'Carrier',
     size: 5,
     description:
-      'Systemic Architecture Flaws span large portions of a system and emerge when foundational design decisions no longer match the product. They are the most expensive class of technical debt to remediate because they require coordinated, cross-cutting refactors.',
+      'The most massive issue. This happens when an agent is fed too many files and "forgets" the original instructions, leading to a complete breakdown in logic across the project.',
   },
   {
-    id: 'memory-leak',
-    name: 'Memory Leak',
+    id: 'infinite-execution-loop',
+    name: 'Infinite Execution Loop',
     classic: 'Battleship',
     size: 4,
     description:
-      'Memory Leaks occur when allocated resources are never released, causing gradual degradation and eventual failure. They are notoriously hard to diagnose because their symptoms appear far from the leak site.',
+      'A classic autonomous agent issue. This is when the agent gets stuck in the terminal, trying the same broken `npm run build` command over and over without trying a new strategy.',
   },
   {
-    id: 'race-condition',
-    name: 'Race Condition',
+    id: 'cascading-hallucination',
+    name: 'Cascading Hallucination',
     classic: 'Cruiser',
     size: 3,
     description:
-      "Race Conditions arise when concurrent operations interleave in unexpected orders. They are difficult to reproduce and often hide behind 'works on my machine' until production load exposes them.",
+      "The AI assumes a specific library or API endpoint exists (when it doesn't) and confidently writes multiple components relying on that fake data.",
   },
   {
-    id: 'infinite-loop',
-    name: 'Infinite Loop',
+    id: 'agentic-regression',
+    name: 'Agentic Regression',
     classic: 'Submarine',
     size: 3,
     description:
-      'Infinite Loops trap a thread or process in a state it cannot escape. They consume CPU, block downstream work, and frequently stem from a missing termination condition or an incorrect loop invariant.',
+      'The "sneaky" bug. The agent successfully writes a new feature, but in doing so, silently deletes or breaks a previously working piece of code because it did not check the dependencies.',
   },
   {
-    id: 'syntax-error',
-    name: 'Syntax Error',
+    id: 'stale-workspace-index',
+    name: 'Stale Workspace Index',
     classic: 'Destroyer',
     size: 2,
     description:
-      'Syntax Errors are the smallest class of bug — surface-level mistakes that prevent code from being parsed or compiled. They are usually quick to fix once located.',
+      'A quick, common error where the AI copilot gives bad advice simply because it has not registered your most recent file save.',
   },
 ] as const;
 

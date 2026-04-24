@@ -46,11 +46,23 @@ The theme is "clearing technical debt".
 
 ## Bug Types (Battleship Mappings)
 
-* Carrier (Size 5) = "Systemic Architecture Flaw"
-* Battleship (Size 4) = "Memory Leak"
-* Cruiser (Size 3) = "Race Condition"
-* Submarine (Size 3) = "Infinite Loop"
-* Destroyer (Size 2) = "Syntax Error"
+* **Carrier (Size 5) — "Context Window Collapse"**: The most massive issue.
+  This happens when an agent is fed too many files and "forgets" the original
+  instructions, leading to a complete breakdown in logic across the project.
+* **Battleship (Size 4) — "Infinite Execution Loop"**: A classic autonomous
+  agent issue. This is when the agent gets stuck in the terminal, trying the
+  same broken `npm run build` command over and over without trying a new
+  strategy.
+* **Cruiser (Size 3) — "Cascading Hallucination"**: The AI assumes a specific
+  library or API endpoint exists (when it doesn't) and confidently writes
+  multiple components relying on that fake data.
+* **Submarine (Size 3) — "Agentic Regression"**: The "sneaky" bug. The agent
+  successfully writes a new feature, but in doing so, silently deletes or
+  breaks a previously working piece of code because it did not check the
+  dependencies.
+* **Destroyer (Size 2) — "Stale Workspace Index"**: A quick, common error
+  where the AI copilot gives bad advice simply because it has not registered
+  your most recent file save.
 
 ## Setup Phase (Placement)
 
@@ -200,3 +212,8 @@ Scope:
   "Missile" in the UI. The theme remains "clearing technical debt"; UI copy
   continues to favor enterprise/SaaS terminology, but the lexical restriction
   is no longer enforced.
+* Replaced the bug catalogue with agent-themed failure modes: Context Window
+  Collapse (Carrier, 5), Infinite Execution Loop (Battleship, 4), Cascading
+  Hallucination (Cruiser, 3), Agentic Regression (Submarine, 3), Stale
+  Workspace Index (Destroyer, 2). The educational modal copy was updated to
+  match.

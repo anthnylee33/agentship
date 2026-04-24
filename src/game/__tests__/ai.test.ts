@@ -14,7 +14,7 @@ function makeBoardWithBug(): BoardState {
   const b = emptyBoard();
   b.placements = [
     {
-      bugId: 'race-condition', // size 3, at (4,4)-(4,6)
+      bugId: 'cascading-hallucination', // size 3, at (4,4)-(4,6)
       origin: { row: 4, col: 4 },
       orientation: 'horizontal',
     },

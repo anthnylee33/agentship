@@ -63,11 +63,11 @@ src/
 
 | Bug | Classic | Size |
 |---|---|---|
-| Systemic Architecture Flaw | Carrier | 5 |
-| Memory Leak | Battleship | 4 |
-| Race Condition | Cruiser | 3 |
-| Infinite Loop | Submarine | 3 |
-| Syntax Error | Destroyer | 2 |
+| Context Window Collapse | Carrier | 5 |
+| Infinite Execution Loop | Battleship | 4 |
+| Cascading Hallucination | Cruiser | 3 |
+| Agentic Regression | Submarine | 3 |
+| Stale Workspace Index | Destroyer | 2 |
 
 Shot terminology: **Code Clean** (miss), **Bug Identified** (hit), **Bug Resolved** (sunk).
 
