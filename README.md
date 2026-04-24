@@ -1,7 +1,7 @@
 # AgentShip
 
-A single-player Battleship-style game, reskinned as an enterprise SaaS dashboard
-where the player uses autonomous agents to clear technical debt.
+A single-player Battleship-style game, reskinned as an educational tool where
+the player uses autonomous agents to clear technical debt.
 
 * Two 10×10 architecture maps (player vs. AI).
 * Classic Battleship rules: hit grants an extra shot, miss ends the turn.
