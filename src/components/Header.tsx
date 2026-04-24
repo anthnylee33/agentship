@@ -22,7 +22,7 @@ export function Header() {
         </div>
         <div>
           <h1 className="text-lg md:text-xl font-semibold tracking-tight text-slate-100">
-            AgentShip <span className="text-slate-400 font-normal">— The Agentic Refactor</span>
+            AgentShip
           </h1>
           <p className="text-xs text-slate-400">Tech-debt remediation console · v0.1</p>
         </div>

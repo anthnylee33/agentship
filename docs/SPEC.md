@@ -1,4 +1,4 @@
-# Project Name: AgentShip — The Agentic Refactor
+# Project Name: AgentShip
 
 ## Objective
 

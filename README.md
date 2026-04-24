@@ -1,4 +1,4 @@
-# AgentShip — The Agentic Refactor
+# AgentShip
 
 A single-player Battleship-style game, reskinned as an enterprise SaaS dashboard
 where the player uses autonomous agents to clear technical debt.
