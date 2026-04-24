@@ -8,8 +8,6 @@ import { WelcomeModal } from './components/WelcomeModal';
 import { GameProvider, useGame } from './context/GameContext';
 import type { Coord } from './game';
 
-const WELCOME_STORAGE_KEY = 'agentship.welcome.dismissed.v1';
-
 function GameSurface({ onShowHelp }: { onShowHelp: () => void }) {
   const {
     phase,
@@ -137,31 +135,13 @@ function Stat({ label, value, tone }: { label: string; value: number; tone: 'sky
   );
 }
 
-function shouldShowWelcomeOnLoad(): boolean {
-  if (typeof window === 'undefined') return false;
-  try {
-    return window.localStorage.getItem(WELCOME_STORAGE_KEY) === null;
-  } catch {
-    return true;
-  }
-}
-
 export default function App() {
-  const [welcomeOpen, setWelcomeOpen] = useState<boolean>(shouldShowWelcomeOnLoad);
-
-  const closeWelcome = () => {
-    setWelcomeOpen(false);
-    try {
-      window.localStorage.setItem(WELCOME_STORAGE_KEY, '1');
-    } catch {
-      /* no-op: localStorage unavailable */
-    }
-  };
+  const [welcomeOpen, setWelcomeOpen] = useState<boolean>(true);
 
   return (
     <GameProvider>
       <GameSurface onShowHelp={() => setWelcomeOpen(true)} />
-      <WelcomeModal open={welcomeOpen} onClose={closeWelcome} />
+      <WelcomeModal open={welcomeOpen} onClose={() => setWelcomeOpen(false)} />
     </GameProvider>
   );
 }
