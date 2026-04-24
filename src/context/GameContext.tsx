@@ -52,6 +52,8 @@ interface GameState {
   aiTick: number;
   /** Winner when phase === 'game_over'. */
   winner: Side | null;
+  /** True once the player dismisses the end-of-match modal. Reset on NEW_GAME. */
+  endGameDismissed: boolean;
   nextLogId: number;
   nextModalId: number;
 }
@@ -67,6 +69,7 @@ type Action =
   | { type: 'PLAYER_SHOT'; coord: Coord }
   | { type: 'AI_SHOT' }
   | { type: 'DISMISS_MODAL' }
+  | { type: 'DISMISS_END_GAME' }
   | { type: 'NEW_GAME'; seed?: number };
 
 const DEFAULT_SEED = 1;
@@ -92,6 +95,7 @@ const initialState = (seed: number): GameState => ({
   setupOrientation: 'horizontal',
   aiTick: 0,
   winner: null,
+  endGameDismissed: false,
   nextLogId: 2,
   nextModalId: 1,
 });
@@ -329,6 +333,11 @@ function reducer(state: GameState, action: Action): GameState {
       return { ...state, modalQueue: rest, aiTick: state.aiTick + 1 };
     }
 
+    case 'DISMISS_END_GAME': {
+      if (state.phase !== 'game_over') return state;
+      return { ...state, endGameDismissed: true };
+    }
+
     case 'NEW_GAME': {
       return initialState(action.seed ?? state.seed);
     }
@@ -350,6 +359,7 @@ interface GameContextValue extends GameState {
   startGame: () => void;
   playerShoot: (coord: Coord) => void;
   dismissModal: () => void;
+  dismissEndGame: () => void;
   newGame: (seed?: number) => void;
   setSeed: (seed: number) => void;
   /** True iff there is no pending modal blocking the current actor. */
@@ -394,6 +404,7 @@ export function GameProvider({ children, seed = DEFAULT_SEED }: ProviderProps) {
   const startGame = useCallback(() => dispatch({ type: 'START_GAME' }), []);
   const playerShoot = useCallback((coord: Coord) => dispatch({ type: 'PLAYER_SHOT', coord }), []);
   const dismissModal = useCallback(() => dispatch({ type: 'DISMISS_MODAL' }), []);
+  const dismissEndGame = useCallback(() => dispatch({ type: 'DISMISS_END_GAME' }), []);
   const newGame = useCallback((s?: number) => dispatch({ type: 'NEW_GAME', seed: s }), []);
   const setSeed = useCallback((s: number) => dispatch({ type: 'SET_SEED', seed: s }), []);
 
@@ -446,6 +457,7 @@ export function GameProvider({ children, seed = DEFAULT_SEED }: ProviderProps) {
     startGame,
     playerShoot,
     dismissModal,
+    dismissEndGame,
     newGame,
     setSeed,
     inputEnabledForPlayer,
