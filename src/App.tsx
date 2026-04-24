@@ -3,6 +3,7 @@ import { Board } from './components/Board';
 import { SetupPanel } from './components/SetupPanel';
 import { ActivityLog } from './components/ActivityLog';
 import { EducationalModal } from './components/EducationalModal';
+import { EndGameModal } from './components/EndGameModal';
 import { Header } from './components/Header';
 import { WelcomeModal } from './components/WelcomeModal';
 import { GameProvider, useGame } from './context/GameContext';
@@ -18,7 +19,18 @@ function GameSurface({ onShowHelp }: { onShowHelp: () => void }) {
     playerShoot,
     currentTurn,
     selectedBugId,
+    winner,
+    modalQueue,
+    endGameDismissed,
+    dismissEndGame,
+    newGame,
   } = useGame();
+
+  const playerRemaining = playerBoard.placements.length - playerBoard.resolvedBugs.length;
+  const aiRemaining = aiBoard.placements.length - aiBoard.resolvedBugs.length;
+
+  const showEndGame =
+    phase === 'game_over' && modalQueue.length === 0 && !endGameDismissed;
 
   const handlePlayerCellClick = (c: Coord) => {
     if (phase === 'setup' && selectedBugId) {
@@ -82,6 +94,14 @@ function GameSurface({ onShowHelp }: { onShowHelp: () => void }) {
         </div>
 
         <EducationalModal />
+        <EndGameModal
+          open={showEndGame}
+          winner={winner}
+          playerRemaining={playerRemaining}
+          aiRemaining={aiRemaining}
+          onNewGame={() => newGame()}
+          onClose={dismissEndGame}
+        />
       </div>
     </div>
   );
